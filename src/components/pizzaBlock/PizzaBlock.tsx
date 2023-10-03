@@ -1,31 +1,59 @@
 import React, { useState } from "react";
 
-const PizzaBlock = () => {
+const PizzaBlock = (item) => {
+  const typesNames = ["тонкое", "традиционное"];
+  const [pizzaCount, setPizzaCount] = useState(0);
 
-    const [pizzaCount, setPizzaCount] = useState(0)
+  const [activeSize, setActiveSize] = useState(0);
+
+  const onclickActiveSize = (index) => {
+    setActiveSize(index);
+  };
+
+  const [activeType, setActiveType] = useState(0);
+
+  const onclickActiveType = (index) => {
+    setActiveType(index);
+  };
 
   return (
     <div className="pizza-block">
-      <img
-        className="pizza-block__image"
-        src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-        alt="Pizza"
-      />
-      <h4 className="pizza-block__title">Чизбургер-пицца</h4>
+      <img className="pizza-block__image" src={item.imageUrl} alt="Pizza" />
+      <h4 className="pizza-block__title">{item.title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li>традиционное</li>
+          {item.types.map((item, index) => (
+            <li
+              key={index}
+              className={activeType === index ? "active" : ""}
+              onClick={() => onclickActiveType(index)}
+            >
+              {typesNames[item]}
+            </li>
+          ))}
+          {/* <li className="active">тонкое</li> */}
         </ul>
         <ul>
-          <li className="active">26 см.</li>
+          {item.sizes.map((item, index) => (
+            <li
+              key={index}
+              className={activeSize === index ? "active" : ""}
+              onClick={() => onclickActiveSize(index)}
+            >
+              {item} см.
+            </li>
+          ))}
+          {/* <li className="active">26 см.</li>
           <li>30 см.</li>
-          <li>40 см.</li>
+          <li>40 см.</li> */}
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от 395 ₽</div>
-        <button className="button button--outline button--add" onClick={()=>setPizzaCount(pizzaCount+1)}>
+        <div className="pizza-block__price">от {item.price} ₽</div>
+        <button
+          className="button button--outline button--add"
+          onClick={() => setPizzaCount(pizzaCount + 1)}
+        >
           <svg
             width="12"
             height="12"
