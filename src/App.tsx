@@ -1,3 +1,4 @@
+import axios from "axios";
 import Categories from "./components/categories/Categories";
 import Header from "./components/header/Header";
 import PizzaBlock from "./components/pizzaBlock/PizzaBlock";
@@ -10,13 +11,12 @@ function App() {
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
-    fetch("https://6525522667cfb1e59ce71807.mockapi.io/items")
-      .then((res) => {
-        return res.json();
+    axios.get("https://6525522667cfb1e59ce71807.mockapi.io/items")
+      .then((response) => {
+        setPizzas(response.data);
       })
-      .then((json) => {
-        setPizzas(json);
-        // console.log(json);
+      .catch((error) => {
+        console.error("Ошибка при выполнении запроса:", error);
       });
   }, []);
 
