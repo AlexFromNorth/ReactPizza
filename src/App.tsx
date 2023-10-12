@@ -6,14 +6,19 @@ import Sort from "./components/sort/Sort";
 import "./scss/app.scss";
 // import { pizzas } from "./assets/pizzas.json";
 import { useEffect, useState } from "react";
+import Skeleton from "./components/pizzaBlock/Skeleton";
 
 function App() {
   const [pizzas, setPizzas] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     axios.get("https://6525522667cfb1e59ce71807.mockapi.io/items")
       .then((response) => {
-        setPizzas(response.data);
+        setTimeout(()=>{
+          setPizzas(response.data);
+          setIsLoading(false)
+        },500)
       })
       .catch((error) => {
         console.error("Ошибка при выполнении запроса:", error);
@@ -32,9 +37,12 @@ function App() {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-              {pizzas.map((item) => (
-                <PizzaBlock key={item.id} {...item} />
-              ))}
+              {
+                isLoading 
+                ? [...new Array(6)].map((_,i)=> <Skeleton key={i}/>)
+                : pizzas.map((item) => <PizzaBlock key={item.id} {...item} />)
+              }
+
             </div>
           </div>
         </div>
