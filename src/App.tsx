@@ -8,6 +8,10 @@ import "./scss/app.scss";
 import { useEffect, useState } from "react";
 import Skeleton from "./components/pizzaBlock/Skeleton";
 import Home from "./pages/Home";
+import NotFoundBlock from "./components/notFoundBlock/NotFoundBlock";
+import NotFound from "./pages/NotFound";
+import { Route, Routes } from "react-router-dom";
+import Cart from "./pages/Cart";
 
 function App() {
 
@@ -18,7 +22,11 @@ function App() {
         <Header />
         <div className="content">
           <div className="container">
-            <Home/>
+            <Routes>
+              <Route path="*" element={<NotFound/>}/>
+              <Route path="/" element={<Home/>}/>
+              <Route path="/cart" element={<Cart/>}/>
+            </Routes>
           </div>
         </div>
       </div>
