@@ -21,10 +21,12 @@ const Home = () => {
       .catch((error) => {
         console.error("Ошибка при выполнении запроса:", error);
       });
+
+      window.scrollTo(0, 0)
   }, []);
 
   return (
-    <>
+    <div className="container">
       <div className="content__top">
         <Categories />
         <Sort />
@@ -35,7 +37,7 @@ const Home = () => {
           ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
           : pizzas.map((item) => <PizzaBlock key={item.id} {...item} />)}
       </div>
-    </>
+    </div>
   );
 };
 
