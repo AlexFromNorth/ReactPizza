@@ -8,28 +8,33 @@ import axios from "axios";
 const Home = () => {
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [categoryId, setCategoryId] = useState(0);
+  const [sortType, setSortType] = useState({name: "популярности", sortProperty: "rating", filter: "desc"});
+
 
   useEffect(() => {
+    setIsLoading(true);
+
     axios
-      .get("https://6525522667cfb1e59ce71807.mockapi.io/items")
+      .get(`https://6525522667cfb1e59ce71807.mockapi.io/items?${categoryId > 0 ? 'category=' + categoryId : ''}&sortBy=${sortType.sortProperty}&order=${sortType.filter}`)
       .then((response) => {
-        setTimeout(() => {
+        // setTimeout(() => {
           setPizzas(response.data);
           setIsLoading(false);
-        }, 500);
+        // }, 600);
       })
       .catch((error) => {
         console.error("Ошибка при выполнении запроса:", error);
       });
 
-      window.scrollTo(0, 0)
-  }, []);
+    window.scrollTo(0, 0);
+  }, [categoryId, sortType]);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories value={categoryId} onChangeCategory={(i)=>setCategoryId(i)}/>
+        <Sort value={sortType} onChangeSort={(i)=>setSortType(i)}/>
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
