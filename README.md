@@ -28,3 +28,9 @@ If you are developing a production application, we recommend updating the config
 
 
 `vite` `react` `redux` `mockapi` `axios` `react skeleton` `react router` `adaptive`
+
+
+
+note: fixed loading image. Need the image is not loaded but immediately displayed
+
+https://translated.turbopages.org/proxy_u/en-ru.ru.dd455099-652e7761-5b503c8d-74722d776562/https/stackoverflow.com/questions/74457472/how-to-wait-for-the-images-to-be-loaded-in-react
