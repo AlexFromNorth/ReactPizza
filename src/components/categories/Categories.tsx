@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const Categories = ({value, onChangeCategory}) => {
-  console.log(value)
 
   const categories = [
     "Все",
