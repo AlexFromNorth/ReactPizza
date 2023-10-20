@@ -27,10 +27,15 @@ If you are developing a production application, we recommend updating the config
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
 
 
-`vite` `react` `redux toolkit` `mockapi` `axios` `react skeleton` `react router` `adaptive`
+`vite` `react` `redux toolkit` `mockapi` `axios` `react skeleton` `react router` `adaptive` `lodash`
 
 
 
 note: fixed loading image. Need the image is not loaded but immediately displayed
 
 https://translated.turbopages.org/proxy_u/en-ru.ru.dd455099-652e7761-5b503c8d-74722d776562/https/stackoverflow.com/questions/74457472/how-to-wait-for-the-images-to-be-loaded-in-react
+
+
+Для оптимизации были исспользованы: useEffect, lodash.debounce, useRef
+
+git commit -m 'added useRef for searchInput, too added debounce with useCallback' 
