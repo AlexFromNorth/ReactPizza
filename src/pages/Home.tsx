@@ -18,9 +18,10 @@ const Home = () => {
 
   const { categoryId, sort } = useSelector((state) => state.filter);
 
-  const { searchValue } = useContext(SearchContext);
+  const { searchValue, handlerLogo } = useContext(SearchContext);
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const category = categoryId > 0 ? "category=" + categoryId : "";
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -28,7 +29,6 @@ const Home = () => {
 
   const fetchPizzas = () => {
     setIsLoading(true);
-    const category = categoryId > 0 ? "category=" + categoryId : "";
 
     axios
       .get(
@@ -44,8 +44,12 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
+    const params = qs.parse(window.location.search, {
+      ignoreQueryPrefix: true,
+    });
+
+    // Если параметры запроса не пусты
+    if (Object.keys(params).length > 0) {
       const sort = sortList.find(
         (obj) => obj.sortProperty === params.sortProperty
       );
@@ -56,15 +60,14 @@ const Home = () => {
           sort,
         })
       );
-      isSearch.current = true;
     }
   }, []);
 
   useEffect(() => {
-    if (isSearch.current) {
+    if (!isSearch.current) {
       fetchPizzas();
     }
-    
+
     isSearch.current = false;
     window.scrollTo(0, 0);
   }, [categoryId, sort.sortProperty, searchValue]);
@@ -79,8 +82,13 @@ const Home = () => {
 
       navigate(`?${queryString}`);
     }
-    isMounted.current = true
+
+    isMounted.current = true;
   }, [categoryId, sort.sortProperty, sort.filter]);
+
+  useEffect(() => {
+    navigate("");
+  }, [handlerLogo]);
 
   const pizzaItems = pizzas
     .filter((el) => {

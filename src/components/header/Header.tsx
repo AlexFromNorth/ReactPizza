@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import logoSvg from "../../assets/img/pizza-logo.svg";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Search from "../search/Search";
+import { useDispatch } from "react-redux";
+import { setFilters } from "../../redux/slices/filterSlice";
+import { SearchContext } from "../../App";
+
+
 
 const Header = () => {
+const dispatch = useDispatch()
+
+const { handlerLogo, setHandlerLogo } = useContext(SearchContext);
+
+
+const toDefaultPage = () => {
+  dispatch(
+    setFilters({
+      categoryId: 0,
+      sort: {
+        name: "популярности",
+        sortProperty: "rating",
+        filter: "desc",
+      },
+    })
+  );
+  setHandlerLogo(!handlerLogo)
+};
+
   return (
     <div className="header">
       <div className="container">
-        <Link to="/">
+        <Link to="/" onClick={()=>{toDefaultPage()}}>
           <div className="header__logo">
             <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>
