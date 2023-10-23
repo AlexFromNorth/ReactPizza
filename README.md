@@ -27,7 +27,7 @@ If you are developing a production application, we recommend updating the config
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
 
 
-`vite` `react` `redux toolkit` `mockapi` `axios` `react skeleton` `react router` `adaptive` `lodash`
+`vite` `react` `redux toolkit` `mockapi` `axios` `react skeleton` `react router` `adaptive` `lodash` `qs`
 
 
 
@@ -38,4 +38,3 @@ https://translated.turbopages.org/proxy_u/en-ru.ru.dd455099-652e7761-5b503c8d-74
 
 Для оптимизации были исспользованы: useEffect, lodash.debounce, useRef
 
-git commit -m 'added useRef for searchInput, too added debounce with useCallback' 
