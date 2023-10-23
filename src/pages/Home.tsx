@@ -15,10 +15,13 @@ const Home = () => {
   const dispatch = useDispatch();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
+  const isInitialLoad = useRef(true)
 
   const { categoryId, sort } = useSelector((state) => state.filter);
 
   const { searchValue, handlerLogo } = useContext(SearchContext);
+
+  
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const category = categoryId > 0 ? "category=" + categoryId : "";
@@ -48,7 +51,6 @@ const Home = () => {
       ignoreQueryPrefix: true,
     });
 
-    // Если параметры запроса не пусты
     if (Object.keys(params).length > 0) {
       const sort = sortList.find(
         (obj) => obj.sortProperty === params.sortProperty
@@ -67,7 +69,7 @@ const Home = () => {
     if (!isSearch.current) {
       fetchPizzas();
     }
-
+    // console.log(sort)
     isSearch.current = false;
     window.scrollTo(0, 0);
   }, [categoryId, sort.sortProperty, searchValue]);
@@ -87,6 +89,11 @@ const Home = () => {
   }, [categoryId, sort.sortProperty, sort.filter]);
 
   useEffect(() => {
+    if (isInitialLoad.current) {
+      isInitialLoad.current = false;
+      return;
+    }
+
     navigate("");
   }, [handlerLogo]);
 
