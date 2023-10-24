@@ -69,7 +69,6 @@ const Home = () => {
     if (!isSearch.current) {
       fetchPizzas();
     }
-    // console.log(sort)
     isSearch.current = false;
     window.scrollTo(0, 0);
   }, [categoryId, sort.sortProperty, searchValue]);

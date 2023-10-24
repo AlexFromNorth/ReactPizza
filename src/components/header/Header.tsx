@@ -1,38 +1,41 @@
 import React, { useContext } from "react";
 
 import logoSvg from "../../assets/img/pizza-logo.svg";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Search from "../search/Search";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFilters } from "../../redux/slices/filterSlice";
 import { SearchContext } from "../../App";
 
-
-
 const Header = () => {
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-const { handlerLogo, setHandlerLogo } = useContext(SearchContext);
+  const {items, totalPrice} = useSelector(state=>state.cart)
+  const { handlerLogo, setHandlerLogo } = useContext(SearchContext);
 
-
-const toDefaultPage = () => {
-  dispatch(
-    setFilters({
-      categoryId: 0,
-      sort: {
-        name: "популярности",
-        sortProperty: "rating",
-        filter: "desc",
-      },
-    })
-  );
-  setHandlerLogo(!handlerLogo)
-};
+  const toDefaultPage = () => {
+    dispatch(
+      setFilters({
+        categoryId: 0,
+        sort: {
+          name: "популярности",
+          sortProperty: "rating",
+          filter: "desc",
+        },
+      })
+    );
+    setHandlerLogo(!handlerLogo);
+  };
 
   return (
     <div className="header">
       <div className="container">
-        <Link to="/" onClick={()=>{toDefaultPage()}}>
+        <Link
+          to="/"
+          onClick={() => {
+            toDefaultPage();
+          }}
+        >
           <div className="header__logo">
             <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>
@@ -44,7 +47,7 @@ const toDefaultPage = () => {
         <Search />
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
-            <span>520 ₽</span>
+            <span>{totalPrice}</span>
             <div className="button__delimiter"></div>
             <svg
               width="18"
@@ -75,7 +78,7 @@ const toDefaultPage = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>3</span>
+            <span>{items.length}</span>
           </Link>
         </div>
       </div>
