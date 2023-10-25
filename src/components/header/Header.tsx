@@ -12,7 +12,7 @@ const Header = () => {
 
   const {items, totalPrice} = useSelector(state=>state.cart)
   const { handlerLogo, setHandlerLogo } = useContext(SearchContext);
-
+  
   const toDefaultPage = () => {
     dispatch(
       setFilters({
