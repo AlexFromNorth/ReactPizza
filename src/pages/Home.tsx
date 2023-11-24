@@ -19,35 +19,27 @@ const Home = () => {
   const isInitialLoad = useRef(true)
 
   const { categoryId, sort } = useSelector((state) => state.filter);
-  const {pizzas} = useSelector((state) => state.pizza);
+  const {pizzas, status} = useSelector((state) => state.pizza);
   const { searchValue, handlerLogo } = useContext(SearchContext);
   const category = categoryId > 0 ? "category=" + categoryId : "";
   
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
 
   const getPizzas = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
 
-    try{
-      // const { data } = await axios.get(
-      //   `https://6525522667cfb1e59ce71807.mockapi.io/items?${category}&sortBy=${sort.sortProperty}&order=${sort.filter}`
-      // )
-      // dispatch(setItems(data))
+
       dispatch(fetchPizzas({
         sort,
         category,
         // searchValue,
         // categoryId,
       }))
-    }catch(error){
-      console.error("Ошибка при выполнении запроса:", error);
-    }finally{
-      setIsLoading(false);
-    }
+
 
     window.scrollTo(0, 0);
   };
@@ -120,7 +112,7 @@ const Home = () => {
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">{isLoading ? skeletons : pizzaItems}</div>
+      <div className="content__items">{status === 'loading' ? skeletons : pizzaItems}</div>
     </div>
   );
 };
