@@ -3,7 +3,6 @@ import Categories from "../components/categories/Categories";
 import Sort, { sortList } from "../components/sort/Sort";
 import Skeleton from "../components/pizzaBlock/Skeleton";
 import PizzaBlock from "../components/pizzaBlock/PizzaBlock";
-import axios from "axios";
 import qs from "qs";
 import { SearchContext } from "../App";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,9 +18,12 @@ const Home = () => {
   const isInitialLoad = useRef(true)
 
   const { categoryId, sort } = useSelector((state) => state.filter);
-  const {pizzas, status} = useSelector((state) => state.pizza);
+  const { pizzas, status } = useSelector((state) => state.pizza);
   const { searchValue, handlerLogo } = useContext(SearchContext);
   const category = categoryId > 0 ? "category=" + categoryId : "";
+
+  console.log('pizzas')
+  console.log(pizzas)
   
   // const [isLoading, setIsLoading] = useState(true);
 
@@ -68,7 +70,7 @@ const Home = () => {
       getPizzas();
     }
     isSearch.current = false;
-  }, [categoryId, sort.sortProperty, searchValue]);
+  }, [categoryId, sort.sortProperty, sort.filter, searchValue]);
 
   useEffect(() => {
     if (isMounted.current) {
@@ -93,7 +95,7 @@ const Home = () => {
     navigate("");
   }, [handlerLogo]);
 
-  // console.log(pizzas)
+  console.log(pizzas)
   const pizzaItems = pizzas
     .filter((el) => {
       if (el.title.toLowerCase().includes(searchValue.toLowerCase())) {
