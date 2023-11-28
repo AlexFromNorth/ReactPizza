@@ -8,40 +8,31 @@ import { SearchContext } from "../App";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategoryId, setFilters } from "../redux/slices/filterSlice";
 import { useNavigate } from "react-router-dom";
-import {  fetchPizzas } from "../redux/slices/pizzasSlice";
+import { fetchPizzas } from "../redux/slices/pizzasSlice";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-  const isInitialLoad = useRef(true)
+  const isInitialLoad = useRef(true);
 
   const { categoryId, sort } = useSelector((state) => state.filter);
   const { pizzas, status } = useSelector((state) => state.pizza);
   const { searchValue, handlerLogo } = useContext(SearchContext);
   const category = categoryId > 0 ? "category=" + categoryId : "";
 
-  console.log('pizzas')
-  console.log(pizzas)
-  
-  // const [isLoading, setIsLoading] = useState(true);
-
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
 
   const getPizzas = async () => {
-    // setIsLoading(true);
-
-
-      dispatch(fetchPizzas({
+    dispatch(
+      fetchPizzas({
         sort,
         category,
-        // searchValue,
-        // categoryId,
-      }))
-
+      })
+    );
 
     window.scrollTo(0, 0);
   };
@@ -95,7 +86,6 @@ const Home = () => {
     navigate("");
   }, [handlerLogo]);
 
-  console.log(pizzas)
   const pizzaItems = pizzas
     .filter((el) => {
       if (el.title.toLowerCase().includes(searchValue.toLowerCase())) {
@@ -114,7 +104,17 @@ const Home = () => {
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">{status === 'loading' ? skeletons : pizzaItems}</div>
+      {status === "error" ? (
+        <div className="content__error-info">
+          <h2>Произошла ошибка &#128577;</h2>
+          <p>К сожалению, не удалось получить пиццы.</p>
+          <p>Попробуйте повторить попытку позже.</p>
+        </div>
+      ) : (
+        <div className="content__items">
+          {status === "loading" ? skeletons : pizzaItems}
+        </div>
+      )}
     </div>
   );
 };
