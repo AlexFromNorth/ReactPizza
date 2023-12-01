@@ -13,13 +13,16 @@ import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzasSlice";
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const isSearch = useRef(false);
   const isMounted = useRef(false);
   const isInitialLoad = useRef(true);
 
-  const { categoryId, sort } = useSelector(selectFilter);
+  const { categoryId, sort, searchValue } = useSelector(selectFilter);
   const { pizzas, status } = useSelector(selectPizzasData);
-  const { searchValue, handlerLogo } = useContext(SearchContext);
+
+  const { handlerLogo } = useContext(SearchContext);
+  // const { searchValue, handlerLogo } = useContext(SearchContext);
   const category = categoryId > 0 ? "category=" + categoryId : "";
 
   const onChangeCategory = (id) => {

@@ -1,6 +1,5 @@
 import Header from "./components/header/Header";
 import "./scss/app.scss";
-// import { pizzas } from "./assets/pizzas.json";
 import React, { createContext, useEffect, useState } from "react";
 import Skeleton from "./components/pizzaBlock/Skeleton";
 import Home from "./pages/Home";
@@ -12,12 +11,11 @@ import Cart from "./pages/cart/cart";
 export const SearchContext = createContext();
 
 function App() {
-  const [searchValue, setSearchValue] = useState("");
   const [handlerLogo, setHandlerLogo] = useState(false)
 
   return (
     <div className="wrapper">
-      <SearchContext.Provider value={{ searchValue, setSearchValue, handlerLogo, setHandlerLogo }}>
+      <SearchContext.Provider value={{ handlerLogo, setHandlerLogo }}>
         <Header />
         <div className="content">
           {/* <div className="container"> */}
