@@ -11,7 +11,7 @@ export const fetchPizzas = createAsyncThunk(
     if(data.length === 0){
       return thunkAPI.rejectWithValue('Пиццы пустые')
     }
-\
+
     return thunkAPI.fulfillWithValue(data);
   }
 );
@@ -44,6 +44,7 @@ const pizzaSlice = createSlice({
     },
   },
 });
+export const selectPizzasData = (state) => state.pizza;
 
 export const { setItems } = pizzaSlice.actions;
 

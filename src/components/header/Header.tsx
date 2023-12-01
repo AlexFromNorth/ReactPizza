@@ -6,11 +6,12 @@ import Search from "../search/Search";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilters } from "../../redux/slices/filterSlice";
 import { SearchContext } from "../../App";
+import { selectCart } from "../../redux/slices/cartSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
 
-  const {items, totalPrice} = useSelector(state=>state.cart)
+  const {items, totalPrice} = useSelector(selectCart)
   const { handlerLogo, setHandlerLogo } = useContext(SearchContext);
   
   const toDefaultPage = () => {

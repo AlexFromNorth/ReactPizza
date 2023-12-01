@@ -6,9 +6,9 @@ import PizzaBlock from "../components/pizzaBlock/PizzaBlock";
 import qs from "qs";
 import { SearchContext } from "../App";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategoryId, setFilters } from "../redux/slices/filterSlice";
+import { selectFilter, setCategoryId, setFilters } from "../redux/slices/filterSlice";
 import { useNavigate } from "react-router-dom";
-import { fetchPizzas } from "../redux/slices/pizzasSlice";
+import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzasSlice";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -17,8 +17,8 @@ const Home = () => {
   const isMounted = useRef(false);
   const isInitialLoad = useRef(true);
 
-  const { categoryId, sort } = useSelector((state) => state.filter);
-  const { pizzas, status } = useSelector((state) => state.pizza);
+  const { categoryId, sort } = useSelector(selectFilter);
+  const { pizzas, status } = useSelector(selectPizzasData);
   const { searchValue, handlerLogo } = useContext(SearchContext);
   const category = categoryId > 0 ? "category=" + categoryId : "";
 
