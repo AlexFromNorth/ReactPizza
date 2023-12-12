@@ -7,6 +7,7 @@ import NotFoundBlock from "./components/notFoundBlock/NotFoundBlock";
 import NotFound from "./pages/NotFound";
 import { Route, Routes } from "react-router-dom";
 import Cart from "./pages/cart/cart";
+import FullPizza from "./pages/FullPizza";
 
 export const SearchContext = createContext();
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/pizzas/:id" element={<FullPizza />} />
           </Routes>
           {/* </div> */}
         </div>
