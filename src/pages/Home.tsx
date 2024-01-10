@@ -6,8 +6,12 @@ import PizzaBlock from "../components/pizzaBlock/PizzaBlock";
 import qs from "qs";
 import { SearchContext } from "../App";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFilter, setCategoryId, setFilters } from "../redux/slices/filterSlice";
-import { useNavigate } from "react-router-dom";
+import {
+  selectFilter,
+  setCategoryId,
+  setFilters,
+} from "../redux/slices/filterSlice";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzasSlice";
 
 const Home = () => {
@@ -96,7 +100,11 @@ const Home = () => {
       }
       return false;
     })
-    .map((item) => <PizzaBlock key={item.id} {...item} />);
+    .map((item) => (
+      <Link to={`/pizza/${item.id}`} key={item.id}>
+        <PizzaBlock  {...item} />
+      </Link>
+    ));
 
   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
 
