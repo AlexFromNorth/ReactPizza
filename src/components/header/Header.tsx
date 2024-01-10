@@ -8,7 +8,7 @@ import { setFilters } from "../../redux/slices/filterSlice";
 import { SearchContext } from "../../App";
 import { selectCart } from "../../redux/slices/cartSlice";
 
-const Header = () => {
+const Header: React.FC = () => {
   const dispatch = useDispatch();
 
   const { items, totalPrice } = useSelector(selectCart);

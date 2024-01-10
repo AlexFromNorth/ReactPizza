@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Categories = ({value, onChangeCategory}) => {
+const Categories: React.FC = ({value, onChangeCategory}) => {
 
   const categories = [
     "Все",

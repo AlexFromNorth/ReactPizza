@@ -14,7 +14,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzasSlice";
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -101,9 +101,7 @@ const Home = () => {
       return false;
     })
     .map((item) => (
-      <Link to={`/pizza/${item.id}`} key={item.id}>
         <PizzaBlock  {...item} />
-      </Link>
     ));
 
   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
