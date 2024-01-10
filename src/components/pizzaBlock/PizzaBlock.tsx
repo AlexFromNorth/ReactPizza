@@ -2,17 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/slices/cartSlice";
 import { Link } from "react-router-dom";
+import { PizzaBlockProps } from "../../@types/types";
 
 const typeNames = ["тонкое", "традиционное"];
 
-const PizzaBlock: React.FC = ({
+const PizzaBlock: React.FC<PizzaBlockProps> = ({
   imageUrl,
   title,
   price,
   sizes,
   types,
   id,
-  rating,
 }) => {
   const dispatch = useDispatch();
   const typesNames = ["тонкое", "традиционное"];
@@ -21,8 +21,8 @@ const PizzaBlock: React.FC = ({
   const currentCountPizzas = items.filter((item) => item.id == id);
   const [pizzaCount, setPizzaCount] = useState(currentCountPizzas.length);
 
-  const [activeSize, setActiveSize] = useState(sizes[0]);
-  const [activeType, setActiveType] = useState(types[0]);
+  const [activeSize, setActiveSize] = useState<number>(sizes[0]);
+  const [activeType, setActiveType] = useState<number>(types[0]);
 
 
   const onclickActiveSize = (item) => {

@@ -1,23 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSort, setSort } from "../../redux/slices/filterSlice";
+import { SortItem } from "../../@types/types";
 
-export const sortList: React.FC = [
+export const sortList:SortItem[] = [
   { name: "популярности", sortProperty: "rating", filter: "desc" },
   { name: "цене (дороже)", sortProperty: "price", filter: 'desc' },
   { name: "цене (дешевле)", sortProperty: "price", filter: 'asc' },
   { name: "алфавиту (А-Я)", sortProperty: "title", filter: 'asc' },
 ];
 
-const Sort = () => {
+const Sort: React.FC = () => {
   const dispatch = useDispatch()
-  const sort = useSelector(selectSort)
-  const sortRef = useRef()
+  const sort:SortItem = useSelector(selectSort)
+  const sortRef = useRef<HTMLDivElement>(null)
 
   const [open, setOpen] = useState(false);
 
 
-  const onClickListitem = (obj) => {
+  const onClickListitem = (obj:SortItem) => {
     dispatch(setSort(obj))
     setOpen(false);
   };
@@ -62,7 +63,7 @@ const Sort = () => {
       {open && (
         <div className="sort__popup">
           <ul>
-            {sortList.map((item, i) => (
+            {sortList.map((item:SortItem, i:number) => (
               <li
                 key={i}
                 className={

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
+import { CategoriesProps } from "../../@types/types";
 
-const Categories: React.FC = ({value, onChangeCategory}) => {
+const Categories: React.FC<CategoriesProps> = ({value, onChangeCategory}) => {
 
   const categories = [
     "Все",

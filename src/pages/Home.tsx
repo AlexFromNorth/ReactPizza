@@ -29,12 +29,13 @@ const Home: React.FC = () => {
   // const { searchValue, handlerLogo } = useContext(SearchContext);
   const category = categoryId > 0 ? "category=" + categoryId : "";
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = (id:number) => {
     dispatch(setCategoryId(id));
   };
 
   const getPizzas = async () => {
     dispatch(
+      //@ts-ignore
       fetchPizzas({
         sort,
         category,
@@ -100,8 +101,8 @@ const Home: React.FC = () => {
       }
       return false;
     })
-    .map((item) => (
-        <PizzaBlock  {...item} />
+    .map((item:any) => (
+        <PizzaBlock key={item.id}  {...item} />
     ));
 
   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
