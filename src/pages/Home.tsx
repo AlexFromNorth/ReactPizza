@@ -13,10 +13,11 @@ import {
 } from "../redux/slices/filterSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzasSlice";
+import { useAppDispatch } from "../redux/store";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const isSearch = useRef(false);
   const isMounted = useRef(false);
@@ -26,7 +27,7 @@ const Home: React.FC = () => {
   const { pizzas, status } = useSelector(selectPizzasData);
 
   const { handlerLogo } = useContext(SearchContext);
-  // const { searchValue, handlerLogo } = useContext(SearchContext);
+
   const category = categoryId > 0 ? "category=" + categoryId : "";
 
   const onChangeCategory = (id:number) => {
@@ -35,10 +36,9 @@ const Home: React.FC = () => {
 
   const getPizzas = async () => {
     dispatch(
-      //@ts-ignore
       fetchPizzas({
         sort,
-        category,
+        category: Number(category),
       })
     );
 

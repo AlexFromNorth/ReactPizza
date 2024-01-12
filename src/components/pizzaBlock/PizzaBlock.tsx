@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/slices/cartSlice";
 import { Link } from "react-router-dom";
-import { PizzaBlockProps } from "../../@types/types";
+import { CartItem, PizzaBlockProps } from "../../@types/types";
 
 const typeNames = ["тонкое", "традиционное"];
 
@@ -34,7 +34,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
   };
 
   const onClickAdd = () => {
-    const item = {
+    const item: CartItem = {
       id,
       title,
       price,

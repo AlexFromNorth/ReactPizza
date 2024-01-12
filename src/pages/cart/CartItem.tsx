@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { CartItemProps } from "../../@types/types";
 
 const CartItem: React.FC<{ item: CartItemProps; index: number }> = ({ item, index }) => {
-  console.log(item, index)
   const dispatch = useDispatch();
 
   const addPizza = () => dispatch(addItem(item))

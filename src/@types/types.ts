@@ -25,7 +25,7 @@ export interface CartItemProps {
 }
 
 export interface PizzaBlockProps {
-  imageUrl: number;
+  imageUrl: string;
   title: string;
   price: number;
   sizes: number[];
@@ -33,3 +33,54 @@ export interface PizzaBlockProps {
   id: string;
   rating: number;
 }
+
+
+// slices types
+export interface CartItem{
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  type: string;
+  size: number;
+  count?: number;
+}
+
+export interface CartSliceState{
+  totalPrice: number;
+  items: CartItem[];
+}
+
+export type Sort = {
+  name: string;
+  sortProperty: 'rating' | 'rating' | 'title';
+  filter: 'desc' | 'asc';
+}
+export interface FilterSliceState{
+  searchValue: string;
+  categoryId: number,
+  sort: Sort;
+}
+
+export enum Status{
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
+
+export interface PizzaSliceState {
+  pizzas: PizzaItem[],
+  status: Status,
+}
+
+export interface PizzaItem {
+  category: number;
+  imageUrl: string;
+  title: string;
+  price: number;
+  sizes: number[];
+  types: number[];
+  id: string;
+  rating: number;
+}
+
