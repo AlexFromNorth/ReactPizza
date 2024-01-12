@@ -6,7 +6,7 @@ import { PizzaItem, PizzaSliceState } from "../../@types/types";
 
 export const fetchPizzas = createAsyncThunk<
 PizzaItem[],
-  { category: number; sort: Sort }
+  { category: string; sort: Sort }
 >("pizza/fetchPizzasStatus", async ({ category, sort }, thunkAPI) => {
   const { data } = await axios.get<PizzaItem[]>(
     `https://6525522667cfb1e59ce71807.mockapi.io/items?${category}&sortBy=${sort.sortProperty}&order=${sort.filter}`

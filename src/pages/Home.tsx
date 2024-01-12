@@ -1,19 +1,20 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import Categories from "../components/categories/Categories";
 import Sort, { sortList } from "../components/sort/Sort";
 import Skeleton from "../components/pizzaBlock/Skeleton";
 import PizzaBlock from "../components/pizzaBlock/PizzaBlock";
 import qs from "qs";
 import { SearchContext } from "../App";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   selectFilter,
   setCategoryId,
   setFilters,
 } from "../redux/slices/filterSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzasSlice";
 import { useAppDispatch } from "../redux/store";
+import { FilterSliceState } from "../@types/types";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const Home: React.FC = () => {
     dispatch(
       fetchPizzas({
         sort,
-        category: Number(category),
+        category,
       })
     );
 
@@ -46,9 +47,9 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    const params = qs.parse(window.location.search, {
+    const params = (qs.parse(window.location.search, {
       ignoreQueryPrefix: true,
-    });
+    }) as unknown) as FilterSliceState;
 
     if (Object.keys(params).length > 0) {
       const sort = sortList.find(
