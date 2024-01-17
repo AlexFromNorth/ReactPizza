@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 
 import logoSvg from "../../assets/img/pizza-logo.svg";
 import { Link, useLocation } from "react-router-dom";
@@ -12,8 +12,10 @@ const Header: React.FC = () => {
   const dispatch = useDispatch();
 
   const { items, totalPrice } = useSelector(selectCart);
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const { handlerLogo, setHandlerLogo } = useContext(SearchContext);
+
+  const isMounted = useRef(false)
 
   const toDefaultPage = () => {
     dispatch(
@@ -28,6 +30,16 @@ const Header: React.FC = () => {
     );
     setHandlerLogo(!handlerLogo);
   };
+
+  useEffect(()=>{
+    if(isMounted.current){
+      const json = JSON.stringify(items)
+      window.localStorage.setItem('cart', json)
+    }
+      isMounted.current = true
+      console.log(window.localStorage)
+  },[items])
+
 
   return (
     <div className="header">
