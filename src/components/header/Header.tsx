@@ -37,7 +37,7 @@ const Header: React.FC = () => {
       window.localStorage.setItem('cart', json)
     }
       isMounted.current = true
-      console.log(window.localStorage)
+      // console.log(window.localStorage)
   },[items])
 
 
