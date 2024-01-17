@@ -2,17 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem, CartSliceState } from "../../@types/types";
 import { RootState } from "../store";
 import { getCartFromLS } from "../../utils/getCartFromLS";
+import { calcTotalPrice } from "../../utils/calcTotalPrice";
 
 
-// console.log(getCartFromLS)
 const cartData = getCartFromLS()
 
 const initialState:CartSliceState = {
-  totalPrice: cartData.reduce((sum:number, obj:CartItem) => obj.price + sum, 0),
-  // items: JSON.parse(localStorage.getItem('cart')) || [],
+  totalPrice: calcTotalPrice(cartData),
   items: cartData,
 };
-console.log(cartData)
 
 const cartSlice = createSlice({
   name: "cart",
@@ -20,11 +18,11 @@ const cartSlice = createSlice({
   reducers: {
     addItem(state, action: PayloadAction<CartItem>) {
       state.items.push(action.payload);
-      state.totalPrice = state.items.reduce((sum, obj) => obj.price + sum, 0);
+      state.totalPrice = calcTotalPrice(state.items);
     },
     removeItem(state, action: PayloadAction<number>) {
       state.items = state.items.filter((_, index) => index !== action.payload);
-      state.totalPrice = state.items.reduce((sum, obj) => obj.price + sum, 0);
+      state.totalPrice = calcTotalPrice(state.items);
     },
     clearItems(state) {
       state.items = [];
