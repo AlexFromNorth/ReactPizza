@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { PizzaItem } from "../@types/types";
 
 const FullPizza: React.FC = () => {
@@ -28,6 +28,8 @@ const FullPizza: React.FC = () => {
       <img src={pizza.imageUrl} alt="picture" className="w30"/>
       <h2 className="mt-10">{pizza.title}</h2>
       <h4 className="mt-10">{pizza.price} руб</h4>
+      <br/>
+      <Link to='/' className="button button--outline button--add">На главную</Link>
     </div>
   );
 };

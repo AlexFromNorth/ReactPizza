@@ -1,6 +1,6 @@
 import Header from "./components/header/Header";
 import "./scss/app.scss";
-import React, { Suspense, createContext, useState } from "react";
+import { Suspense, createContext, useState } from "react";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 
@@ -10,9 +10,9 @@ import { Route, Routes } from "react-router-dom";
 // -------------
 // -------------
 import { lazy } from "react";
-const Cart = lazy(()=>import("./pages/cart/Cart"))
-const NotFound = lazy(()=>import("./pages/NotFound"))
-const FullPizza = lazy(()=>import("./pages/FullPizza"))
+const Cart = lazy(()=>import( /* webpackChunkName: "Cart" */ "./pages/cart/Cart"))
+const NotFound = lazy(()=>import( /* webpackChunkName: "NotFound" */ "./pages/NotFound"))
+const FullPizza = lazy(()=>import( /* webpackChunkName: "FullPizza" */ "./pages/FullPizza"))
 
 
 export const SearchContext = createContext();
