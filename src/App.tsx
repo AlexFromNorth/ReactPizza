@@ -15,7 +15,7 @@ const NotFound = lazy(()=>import( /* webpackChunkName: "NotFound" */ "./pages/No
 const FullPizza = lazy(()=>import( /* webpackChunkName: "FullPizza" */ "./pages/FullPizza"))
 
 
-export const SearchContext = createContext();
+export const SearchContext = createContext<{ handlerLogo: boolean; setHandlerLogo: React.Dispatch<React.SetStateAction<boolean>> } | undefined>(undefined);
 
 function App() {
   const [handlerLogo, setHandlerLogo] = useState(false)

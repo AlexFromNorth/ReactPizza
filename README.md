@@ -38,3 +38,4 @@ https://translated.turbopages.org/proxy_u/en-ru.ru.dd455099-652e7761-5b503c8d-74
 
 Для оптимизации были исспользованы: useEffect, lodash.debounce, useRef
 
+lazy

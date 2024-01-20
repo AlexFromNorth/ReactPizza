@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 import { clearItems } from "../../redux/slices/cartSlice";
 import CartEmpty from "./CartEmpty";
+import { RootState } from "../../redux/store";
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
-  const { items, totalPrice } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useSelector((state: RootState) => state.cart);
 
   const clearCarts = () => {
     if (window.confirm("Вы действительно хотите очистить корзину?")) {
@@ -100,7 +101,7 @@ const Cart: React.FC = () => {
             {items.map((item, index) => (
               <CartItem
                 key={index}
-                item={item}
+                item={{item}}
                 totalPrice={totalPrice}
                 index={index}
               />

@@ -1,8 +1,8 @@
-export interface PizzaItem {
-  imageUrl: string;
-  title: string;
-  price: number;
-}
+// export interface PizzaItem {
+//   imageUrl: string;
+//   title: string;
+//   price: number;
+// }
 
 export interface SortItem {
   name: string;
@@ -12,7 +12,7 @@ export interface SortItem {
 
 export interface CategoriesProps {
   value: number;
-  onChangeCategory: any;
+  onChangeCategory: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
 export interface CartItemProps {
@@ -22,6 +22,9 @@ export interface CartItemProps {
   size: number;
   title: string;
   type: string;
+  totalPrice: number;
+  item: CartItem;
+  index: number;
 }
 
 export interface PizzaBlockProps {
@@ -53,7 +56,7 @@ export interface CartSliceState{
 
 export type Sort = {
   name: string;
-  sortProperty: 'rating' | 'rating' | 'title';
+  sortProperty: 'rating' | 'price' | 'title';
   filter: 'desc' | 'asc';
 }
 export interface FilterSliceState{
